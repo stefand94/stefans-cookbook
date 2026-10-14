@@ -1,0 +1,433 @@
+/*
+  Stefan's Cookbook — recipe data
+  ================================
+  Every recipe lives in this file. To add one, copy an existing recipe into the
+  right section's `recipes` list and edit it. See README.md for the field reference.
+
+  Ingredient quick reference:
+    { item: "Garlic, grated", qty: 2, unit: "clove" }      → scales: 2 cloves, 4 cloves…
+    { item: "Red chilli", qty: [0.5, 1] }                   → a range: ½–1
+    { item: "Chicken breast", qty: 380, unit: "g", also: { qty: 2, unit: "breast" } }
+    { item: "Salt & pepper", text: "to taste" }             → never scales
+*/
+
+window.COOKBOOK = {
+  title: "Stefan's Cookbook",
+  intro:
+    "Go-to marinades, soups, sauces, sides and desserts. Pick the number of people and every quantity rescales; calories are an estimate per serving.",
+
+  sections: [
+    {
+      id: "starters",
+      name: "Starters",
+      recipes: [],
+    },
+
+    {
+      id: "soups",
+      name: "Soups",
+      blurb: "Draft recipes, adjust quantities and seasoning to taste.",
+      recipes: [
+        {
+          id: "jewish-chicken-soup",
+          name: "Classic Jewish Chicken Soup",
+          servings: 4,
+          kcal: 220,
+          kcalNote: "Soup and chicken, without noodles or matzo balls.",
+          ingredients: [
+            { item: "Whole chicken or bone-in thighs/drumsticks", qty: 1000, unit: "g" },
+            { item: "Onion, quartered", qty: 1, unit: "large" },
+            { item: "Carrots, chopped", qty: 3 },
+            { item: "Celery, chopped", qty: 3, unit: "stalk" },
+            { item: "Parsnip, chopped (optional, traditional)", qty: 1 },
+            { item: "Garlic", qty: 2, unit: "clove" },
+            { item: "Fresh dill", qty: 1, unit: "small bunch" },
+            { item: "Fresh parsley", qty: 1, unit: "small bunch" },
+            { item: "Bay leaves", qty: 2 },
+            { item: "Black peppercorns", qty: 1, unit: "tsp" },
+            { item: "Salt", text: "to taste" },
+            { item: "Water", qty: 2500, unit: "ml" },
+            { item: "Egg noodles or matzo balls (optional, to serve)", text: "as desired" },
+          ],
+          method: [
+            "Place the chicken in a large pot, cover with the water, bring to the boil and skim off any scum.",
+            "Add the onion, carrots, celery, parsnip, garlic, bay leaves and peppercorns.",
+            "Simmer gently, partially covered, for 1.5–2 hours until the chicken is falling off the bone and the stock is deeply flavoured.",
+            "Remove the chicken, shred the meat and discard the bones and skin. Strain the stock if you want a clearer soup, or leave the vegetables in.",
+            "Return the shredded chicken to the pot and season with salt. Stir through the chopped dill and parsley just before serving.",
+            "Serve with noodles or matzo balls if using.",
+          ],
+        },
+        {
+          id: "butternut-squash-soup",
+          name: "Curried Butternut Squash Soup",
+          servings: 4,
+          kcal: 190,
+          ingredients: [
+            { item: "Butternut squash, peeled and cubed", qty: 1, unit: "medium", also: { qty: 1000, unit: "g" } },
+            { item: "Onion, diced", qty: 1 },
+            { item: "Garlic, minced", qty: 2, unit: "clove" },
+            { item: "Fresh ginger, grated", qty: 1, unit: "tbsp" },
+            { item: "Curry powder", qty: [1, 2], unit: "tbsp" },
+            { item: "Ground cumin", qty: 1, unit: "tsp" },
+            { item: "Vegetable stock", qty: 800, unit: "ml" },
+            { item: "Olive oil", qty: 1, unit: "tbsp" },
+            { item: "Salt & pepper", text: "to taste" },
+          ],
+          method: [
+            "Heat the oil in a large pot and sauté the onion until softened.",
+            "Add the garlic, ginger, curry powder and cumin and cook for 1 minute until fragrant.",
+            "Add the squash and stock, bring to the boil, then simmer for 20–25 minutes until the squash is tender.",
+            "Blend until smooth and season to taste. Thin with extra stock or water if too thick.",
+          ],
+        },
+        {
+          id: "minestrone",
+          name: "Minestrone",
+          servings: 4,
+          kcal: 210,
+          ingredients: [
+            { item: "Olive oil", qty: 1, unit: "tbsp" },
+            { item: "Onion, diced", qty: 1 },
+            { item: "Carrots, diced", qty: 2 },
+            { item: "Celery, diced", qty: 2, unit: "stalk" },
+            { item: "Garlic, minced", qty: 2, unit: "clove" },
+            { item: "Courgette, diced", qty: 1 },
+            { item: "Tinned chopped tomatoes", qty: 400, unit: "g", also: { qty: 1, unit: "tin" } },
+            { item: "Vegetable or chicken stock", qty: 1000, unit: "ml" },
+            { item: "Tinned cannellini or borlotti beans, drained", qty: 400, unit: "g", also: { qty: 1, unit: "tin" } },
+            { item: "Small pasta (e.g. ditalini)", qty: 80, unit: "g" },
+            { item: "Parmesan rind (optional)", text: "1 piece" },
+            { item: "Fresh basil or dried oregano", text: "to taste" },
+            { item: "Salt & pepper", text: "to taste" },
+          ],
+          method: [
+            "Heat the oil and sauté the onion, carrot and celery until softened, adding the garlic for the last minute.",
+            "Add the courgette, tomatoes, stock and the parmesan rind if using. Simmer for 15 minutes.",
+            "Add the beans and pasta and cook until the pasta is al dente, about 10 minutes more.",
+            "Remove the parmesan rind, season, and stir through the basil or oregano before serving.",
+          ],
+        },
+        {
+          id: "french-onion-soup",
+          name: "French Onion Soup",
+          servings: 4,
+          kcal: 150,
+          kcalNote: "Soup alone. About 320 kcal per serving with the bread and cheese topping.",
+          ingredients: [
+            { item: "Large onions, thinly sliced", qty: [4, 5] },
+            { item: "Butter", qty: 30, unit: "g" },
+            { item: "Olive oil", qty: 1, unit: "tbsp" },
+            { item: "Sugar (helps caramelise)", qty: 1, unit: "tsp" },
+            { item: "Garlic, minced", qty: 1, unit: "clove" },
+            { item: "Plain flour", qty: 1, unit: "tbsp" },
+            { item: "Dry white wine", qty: 120, unit: "ml" },
+            { item: "Beef stock", qty: 1000, unit: "ml" },
+            { item: "Bay leaf", qty: 1 },
+            { item: "Thyme", text: "a few sprigs" },
+            { item: "Baguette slices, toasted (optional)", qty: 4 },
+            { item: "Gruyère, grated (optional)", qty: 100, unit: "g" },
+          ],
+          method: [
+            "Melt the butter with the oil in a large pot. Add the onions and sugar and cook low and slow, stirring often, for 35–45 minutes until deeply caramelised. Don't rush this step.",
+            "Add the garlic and cook for 1 minute, then stir in the flour and cook for 1 minute more.",
+            "Deglaze with the wine, scraping up any bits, and let it reduce slightly.",
+            "Add the stock, bay leaf and thyme and simmer for 20–30 minutes. Season to taste.",
+            "To serve the classic way, ladle into oven-proof bowls, top with toasted baguette and grated Gruyère, and grill until bubbling and golden.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "mains",
+      name: "Mains",
+      recipes: [],
+    },
+
+    {
+      id: "sides",
+      name: "Sides",
+      recipes: [
+        {
+          id: "do-chua",
+          name: "Đồ Chua (Pickled Carrot & Daikon)",
+          servings: 2,
+          kcal: 40,
+          kcalNote: "Roughly 50–55 kcal per 100g of pickled veg. Most of the sugar stays in the brine.",
+          ingredients: [
+            { item: "Carrot, julienned", qty: 1, unit: "large" },
+            { item: "Daikon, julienned (or extra carrot)", qty: 1, unit: "small" },
+            { item: "Salt (draw-out step)", qty: 6, unit: "g" },
+            { item: "Sugar (draw-out step)", qty: 4, unit: "g" },
+            { item: "White or rice vinegar", qty: 120, unit: "ml" },
+            { item: "Warm water", qty: 120, unit: "ml" },
+            { item: "Sugar (pickling liquid)", qty: 36, unit: "g" },
+            { item: "Salt (pickling liquid)", qty: 3, unit: "g" },
+          ],
+          method: [
+            "Toss the julienned veg with the draw-out salt and sugar and leave for 15–20 minutes.",
+            "Squeeze out the liquid and pat dry with paper towel.",
+            "Dissolve the pickling-liquid sugar and salt in the vinegar and warm water.",
+            "Pack the veg loosely into a jar (loose packing lets the liquid circulate) and pour over the liquid until submerged.",
+            "Rest for 1 hour at room temperature, then refrigerate overnight for the best flavour. If you're short on time it can go straight into the fridge (allow 4–6 hours minimum).",
+          ],
+          notes: [
+            { label: "Keeps", text: "1–2 weeks in the fridge." },
+            {
+              label: "Vinegar notes",
+              text: "Rice vinegar is the classic choice. Mirin is a sweet wine, not acidic enough to pickle; malt vinegar (e.g. Sarson's) is too harsh and clashes with the clean flavour. Apple cider vinegar is a fine substitute if rice vinegar runs low: add an extra 5–6g sugar to round out the fruitier edge, or blend it 50/50 with any remaining rice vinegar.",
+            },
+          ],
+        },
+        {
+          id: "cucumber-pickle",
+          name: "Quick Cucumber Pickle",
+          servings: 4,
+          kcal: 15,
+          kcalNote: "About 25–30 kcal per 100g; a serving is ~50g.",
+          blurb: "Made fresh as a separate small batch. Don't add it to the carrot jar: cucumber waters down the brine and shortens its shelf life.",
+          ingredients: [
+            { item: "Cucumber, thinly sliced", qty: 200, unit: "g" },
+            { item: "Rice vinegar", qty: 90, unit: "ml" },
+            { item: "Sugar", qty: 36, unit: "g" },
+            { item: "Salt", qty: 0.25, unit: "tsp" },
+          ],
+          method: [
+            "Toss everything together.",
+            "Leave for 15–30 minutes at room temperature. Don't leave it much longer or it goes limp and watery.",
+          ],
+          notes: [
+            {
+              label: "Combining with carrots",
+              text: "Possible for convenience in one jar, but then eat it within 2–3 days rather than the 1–2 weeks carrots keep alone. Scoop out the cucumber seeds first and pat dry before jarring to limit extra water.",
+            },
+          ],
+        },
+        {
+          id: "tandoori-air-fryer-veg",
+          name: "Tandoori Air-Fryer Veg",
+          servings: 4,
+          kcal: 85,
+          blurb: "Carrot, broccoli and cauliflower. Quantities are a suggested starting point.",
+          ingredients: [
+            { item: "Carrots, cut into thin batons", qty: 2, unit: "medium", also: { qty: 200, unit: "g" } },
+            { item: "Broccoli, in florets", qty: 200, unit: "g" },
+            { item: "Cauliflower, in florets", qty: 250, unit: "g" },
+            { item: "Oil", qty: 1, unit: "tbsp" },
+            { item: "Tandoori masala (or cumin, coriander, smoked paprika, turmeric, garlic powder)", qty: 2, unit: "tsp" },
+            { item: "Salt", text: "to taste" },
+            { item: "Lemon, to finish", qty: 0.5 },
+            { item: "Fresh coriander, to finish", text: "a handful" },
+          ],
+          method: [
+            "Toss the veg with the oil first. It's always needed so the spices bind rather than sitting as a dry, grainy layer.",
+            "Season with the tandoori masala (or your own mix of cumin, coriander, smoked paprika, turmeric, garlic powder and salt). Massage in by hand for even coverage.",
+            "Air fry at 200°C for 12–15 minutes, shaking halfway. Cut the carrots thinner than the florets so everything finishes together.",
+            "Finish with a squeeze of lemon and fresh coriander. Serve with a yoghurt-mint or yoghurt-cumin dip if you have one.",
+          ],
+          notes: [
+            {
+              label: "No yoghurt on hand?",
+              text: "Use oil + tomato paste + spices + a squeeze of lemon as the binding paste instead, the closest tandoori-compatible substitute. A dialled-back peri-peri (~1 tsp) with extra curry powder also works as a binder, though the flavour reads as a different lane rather than a tight tandoori match.",
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "sauces",
+      name: "Sauces",
+      recipes: [
+        {
+          id: "nuoc-cham",
+          name: "Nuoc Cham (dipping sauce)",
+          servings: 2,
+          yield: { qty: 90, unit: "ml" },
+          kcal: 35,
+          kcalNote: "Almost all from the sugar, about 10 kcal per tbsp.",
+          ingredients: [
+            { item: "Fish sauce", qty: 1.5, unit: "tbsp" },
+            { item: "Lime juice (top up with lemon if short)", qty: 1.5, unit: "tbsp" },
+            { item: "Sugar", qty: [1, 1.5], unit: "tbsp" },
+            { item: "Warm water", qty: 1.5, unit: "tbsp" },
+            { item: "Garlic, minced", qty: 0.5, unit: "clove" },
+            { item: "Red chilli, chopped", qty: [0.125, 0.25] },
+          ],
+          method: [
+            "Dissolve the sugar in the warm water.",
+            "Stir in the fish sauce and lime juice, then add the garlic and chilli last.",
+            "Balance salty / sour / sweet / heat to taste.",
+          ],
+          notes: [{ label: "Keeps", text: "Best fresh; 2–3 days in the fridge." }],
+        },
+        {
+          id: "chimichurri",
+          name: "Chimichurri",
+          servings: 4,
+          yield: { qty: 90, unit: "ml" },
+          kcal: 125,
+          kcalNote: "Oil-heavy, about 85–90 kcal per tbsp, so use sparingly if you're watching the numbers.",
+          ingredients: [
+            { item: "Extra virgin olive oil", qty: 60, unit: "ml" },
+            { item: "Red wine vinegar", qty: 30, unit: "ml" },
+            { item: "Garlic, minced", qty: 3, unit: "clove" },
+            { item: "Dried oregano", qty: 1.5, unit: "tbsp" },
+            { item: "Salt & pepper", text: "to taste" },
+          ],
+          method: [
+            "Whisk or shake all the ingredients together.",
+            "Rest for at least 15–20 minutes before serving to let the flavours meld.",
+          ],
+          notes: [{ label: "Keeps", text: "A few days in the fridge, covered." }],
+        },
+        {
+          id: "red-wine-sauce",
+          name: "Red Wine Sauce",
+          servings: 4,
+          yield: { qty: 150, unit: "ml" },
+          kcal: 95,
+          kcalNote: "About 370 kcal for the whole batch.",
+          blurb: "For steak or similar.",
+          ingredients: [
+            { item: "Shallots, finely diced (or 1 medium onion per 2 shallots)", qty: 2 },
+            { item: "Tomato paste", qty: 1, unit: "tbsp" },
+            { item: "Red wine", qty: 500, unit: "ml" },
+            { item: "Beef stock", qty: 250, unit: "ml" },
+            { item: "Bay leaves", qty: [1, 2] },
+            { item: "Thyme", text: "a few sprigs" },
+            { item: "Worcestershire sauce", qty: 1, unit: "tbsp" },
+            { item: "Black pepper", text: "a few cracks" },
+            { item: "Butter, cold, cubed", qty: 20, unit: "g" },
+          ],
+          method: [
+            "Sauté the shallots in a little butter or oil until translucent.",
+            "Add the tomato paste and cook it down for 1–2 minutes.",
+            "Deglaze with the red wine and reduce by at least half.",
+            "Add the beef stock (roughly 1 part stock to 2 parts reduced wine), the bay leaves, thyme and a splash of Worcestershire sauce. Season with black pepper.",
+            "Reduce until syrupy and coating the back of a spoon.",
+            "Off the heat, whisk in the cold butter a knob at a time until emulsified and glossy.",
+          ],
+        },
+        {
+          id: "steak-suzette-sauce",
+          name: "Steak Suzette Sauce",
+          servings: 8,
+          kcal: [80, 165],
+          kcalNote: "Per 1–2 tbsp spoonful. The whole batch is about 2,070 kcal, almost all olive oil.",
+          blurb: "A warm oil, lemon and soy sauce. These are your pencilled-in quantities; the printed recipe's serving size wasn't visible, so the 8 servings is a guess.",
+          ingredients: [
+            { item: "Olive oil", qty: 1, unit: "cup" },
+            { item: "Fresh lemon juice", qty: 2 / 3, unit: "cup" },
+            { item: "Soy sauce", qty: 40, unit: "ml" },
+            { item: "Red chillies, finely chopped", qty: [2, 3] },
+            { item: "Garlic, crushed", qty: [2, 3], unit: "clove" },
+            { item: "Salt", text: "a pinch" },
+          ],
+          method: [
+            "Put all the sauce ingredients in a small pot over a medium heat for about 2 minutes, until hot.",
+            "Spoon over the steak. A tbsp or two per person is plenty.",
+          ],
+          notes: [
+            { label: "Check the original", text: "The top of the method was cut off in the photo, so check the printed page for any step before this." },
+            { label: "Printed original", text: "2 cups olive oil, ¾ cup lemon juice, ⅓ cup soy sauce, with the same chilli, garlic and salt. About double the calories." },
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "marinades",
+      name: "Marinades",
+      recipes: [
+        {
+          id: "vietnamese-lemongrass-chicken",
+          name: "Vietnamese Lemongrass Chicken",
+          servings: 2,
+          kcal: 395,
+          kcalNote: "Chicken, marinade, and about 5g of oil to cook.",
+          ingredients: [
+            { item: "Chicken breast", qty: 380, unit: "g", also: { qty: 2, unit: "breast" } },
+            { item: "Lemongrass, minced", qty: 1, unit: "stalk", also: { qty: 20, unit: "g" } },
+            { item: "Garlic, grated", qty: 2, unit: "clove" },
+            { item: "Shallot, minced", qty: 1, also: { qty: 30, unit: "g" } },
+            { item: "Fish sauce", qty: 1.5, unit: "tbsp" },
+            { item: "Light soy sauce", qty: 1, unit: "tbsp" },
+            { item: "Honey or brown sugar", qty: 1, unit: "tbsp" },
+            { item: "Ginger, grated", qty: 5, unit: "g" },
+            { item: "Red chilli, chopped", qty: [0.5, 1] },
+            { item: "Lime juice", qty: 0.5, unit: "lime" },
+            { item: "Five-spice (optional)", qty: 0.5, unit: "tsp" },
+          ],
+          method: [
+            "Mix everything except the chicken, either in a blender or by mincing finely by hand.",
+            "Coat the chicken and marinate for 2–8 hours (30 minutes to 1.5 hours for thin cutlets).",
+            "Pan-sear or grill hard over a high heat so the sugar caramelises.",
+            "Rest, then slice on the diagonal.",
+          ],
+          notes: [
+            { label: "Tip", text: "If the marinade is too thick to blend, add 1–2 tsp extra fish sauce or 1–2 tbsp water, or mince finely by hand instead." },
+          ],
+          serveWith: {
+            title: "Low-calorie ways to serve it (no vermicelli needed)",
+            items: [
+              "Lettuce cups (butter lettuce or iceberg): wrap chicken, pickles and herbs",
+              "Cabbage or lettuce salad bowl: shredded cabbage base, chicken, pickles, herbs, nuoc cham drizzle",
+              "Cauliflower rice",
+              "Courgetti (zucchini noodles)",
+              "Shirataki/konjac noodles: the closest texture match to vermicelli, almost zero calories",
+              "50g dry rice (~180 kcal) for a more traditional feel, or 30–40g alongside a salad for extra volume at a lower calorie cost",
+            ],
+          },
+        },
+        {
+          id: "shish-tawook",
+          name: "Lebanese Yoghurt Chicken (Shish Tawook style)",
+          servings: 2,
+          kcal: 435,
+          kcalNote: "Chicken, marinade, and about 5g of oil to cook.",
+          ingredients: [
+            { item: "Chicken breast", qty: 380, unit: "g", also: { qty: 2, unit: "breast" } },
+            { item: "Fat-free Greek yoghurt", qty: 150, unit: "ml" },
+            { item: "Lemon juice", qty: 1, unit: "lemon" },
+            { item: "Garlic, grated", qty: 2, unit: "clove" },
+            { item: "Olive oil", qty: 1, unit: "tbsp" },
+            { item: "Ground cumin", qty: 1, unit: "tsp" },
+            { item: "Paprika", qty: 1, unit: "tsp" },
+            { item: "Ground coriander", qty: 0.5, unit: "tsp" },
+            { item: "Dried oregano", qty: 0.5, unit: "tsp" },
+            { item: "Cinnamon (optional)", qty: 0.125, unit: "tsp" },
+            { item: "Salt & pepper", text: "to taste" },
+          ],
+          method: [
+            "Mix the marinade ingredients together.",
+            "Coat the chicken and marinate for 2–8 hours (overnight is best).",
+            "Grill or pan-sear over a high heat, traditionally on skewers.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "desserts",
+      name: "Desserts",
+      blurb: "Ideas for using up leftover fat-free Greek yoghurt.",
+      recipes: [],
+      ideas: [
+        { name: "Yoghurt bark", text: "Spread yoghurt thin on a lined tray, mix in honey and vanilla, scatter berries and dark chocolate shavings, freeze 2–3 hrs, snap into shards." },
+        { name: "Yoghurt bark v2", text: "Swap the berries for crushed pistachio, a drizzle of tahini and a pinch of sea salt for a halva-adjacent flavour." },
+        { name: "“Cheesecake” mousse", text: "Whip yoghurt with a little cream cheese or mascarpone, vanilla and sweetener; top with berries." },
+        { name: "Frozen yoghurt bites", text: "Yoghurt, honey and vanilla in silicone moulds or ice cube trays, frozen. Good for portion control." },
+        { name: "Nice cream", text: "Blend yoghurt with frozen banana and a spoon of peanut butter." },
+        { name: "Parfait", text: "Layered yoghurt, honey, toasted nuts and granola." },
+        { name: "Mango or berry fool", text: "Fold puréed mango or crushed berries through yoghurt with honey, then chill." },
+        { name: "Baked yoghurt custard", text: "Yoghurt, egg, honey and vanilla baked in a water bath. Comes out like a light, Greek-style baked cheesecake." },
+        { name: "Chocolate-dipped frozen yoghurt clusters", text: "Dollop spoonfuls onto a tray, freeze, dip the bottoms in melted dark chocolate, refreeze." },
+        { name: "Affogato", text: "Chilled or frozen yoghurt with a hot shot of espresso poured over." },
+        { name: "Spiced roasted stone fruit", text: "Roast peaches or plums with cinnamon and honey; serve warm over cold yoghurt for a hot/cold contrast." },
+        { name: "Lemon-yoghurt whip", text: "Yoghurt whisked with lemon curd. Light and tart, good after a heavier meal." },
+      ],
+    },
+  ],
+};

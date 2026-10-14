@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stefan's Cookbook</title>
+  <meta name="description" content="Stefan's go-to recipes, with scalable servings and calories per serving.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍲</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <p class="eyebrow">Recipes &amp; notes</p>
+    <h1 id="title">Stefan's Cookbook</h1>
+    <p id="intro" class="intro"></p>
+    <nav id="toc" class="toc" aria-label="Sections"></nav>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search recipes or ingredients…" aria-label="Search recipes">
+      <button id="toggle-all" type="button">Expand all</button>
+    </div>
+  </header>
+
+  <main id="book"></main>
+
+  <footer class="footer">
+    Calories are estimates per serving. Quantities are rounded to sensible kitchen amounts when scaled.
+  </footer>
+
+  <script src="recipes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
