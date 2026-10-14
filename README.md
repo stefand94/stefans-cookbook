@@ -32,10 +32,14 @@ All recipes live in [`recipes.js`](recipes.js). Copy an existing recipe into the
   ],
   method: ["Step one.", "Step two."],
   notes: [{ label: "Tip", text: "Optional notes shown under the method." }],
+  serveWith: { title: "Ways to serve it", items: ["Lettuce cups"] }, // optional list
+  diagram: { title: "How to fold it", steps: ["Step one.", "Step two."], svg: `<svg …>` }, // optional picture
 }
 ```
 
 Use metric for every amount: `g` or `ml` (they switch to kg / litres over 1000). For whole items, either use a count word as the unit (`clove`, `stalk`, `sprig`…) or give the weight and add the count with `also`, e.g. `{ item: "Onion", qty: 150, unit: "g", also: { qty: 1, unit: "onion" } }` → "150g (1 onion)". Add `approx: true` inside `also` to show it with a "~". Leave `unit` out for plain counts (`{ item: "Bay leaves", qty: 2 }`).
+
+For a `diagram`, write the SVG inline and style it with the `dg-*` classes in `styles.css` (see the feta cigars recipe) so it follows light and dark mode. The `steps` are shown as numbered captions under the picture.
 
 ## Previewing locally
 

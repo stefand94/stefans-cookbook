@@ -103,6 +103,17 @@
     );
   }
 
+  // Step-by-step picture: inline SVG (from recipes.js, so trusted) plus numbered captions.
+  function renderDiagram(diagram) {
+    const art = el("div", { class: "diagram-art", role: "img", "aria-label": diagram.title });
+    art.innerHTML = diagram.svg;
+    return el("figure", { class: "diagram" },
+      el("h4", {}, diagram.title),
+      art,
+      el("ol", { class: "diagram-steps" }, diagram.steps.map((s) => el("li", {}, s)))
+    );
+  }
+
   function renderRecipe(recipe) {
     servingsState[recipe.id] = recipe.servings;
 
@@ -154,6 +165,7 @@
             el("ol", { class: "method" }, recipe.method.map((s) => el("li", {}, s)))
           )
         ),
+        recipe.diagram ? renderDiagram(recipe.diagram) : null,
         el("p", { class: "kcal" },
           el("strong", {}, `${formatKcal(recipe.kcal)} kcal per serving`),
           recipe.kcalNote ? ` · ${recipe.kcalNote}` : ""
