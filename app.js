@@ -6,31 +6,19 @@
 
   // ---------- Quantity formatting ----------
 
-  const FRACTIONS = { 0.125: "⅛", 0.25: "¼", 0.333: "⅓", 0.5: "½", 0.667: "⅔", 0.75: "¾" };
-  const SPOON_UNITS = new Set(["tsp", "tbsp", "cup"]);
-  const PLURALS = {
-    clove: "cloves", stalk: "stalks", lemon: "lemons", lime: "limes", breast: "breasts",
-    tin: "tins", cup: "cups", "small bunch": "small bunches", sprig: "sprigs",
-  };
+  const FRACTIONS = { 0.25: "¼", 0.5: "½", 0.75: "¾" };
+  const METRIC = new Set(["g", "ml", "kg", "litre", "litres"]);
+  const PLURALS = { chilli: "chillies" };
 
-  function nearest(value, steps) {
-    let best = steps[0];
-    for (const s of steps) if (Math.abs(s - value) < Math.abs(best - value)) best = s;
-    return best;
-  }
-
-  // Express a number as "1½", "¾", "2" etc., snapping to cook-friendly fractions.
-  function fraction(n, allowThirds, allowEighths) {
+  // Express a count as "1½", "¾", "2" etc.
+  function fraction(n) {
     const whole = Math.floor(n);
-    const parts = [0, 0.25, 0.5, 0.75, 1];
-    if (allowThirds) parts.push(0.333, 0.667);
-    if (allowEighths && whole === 0) parts.push(0.125);
-    let frac = nearest(n - whole, parts);
+    const steps = [0, 0.25, 0.5, 0.75, 1];
+    let frac = steps.reduce((best, s) => (Math.abs(s - (n - whole)) < Math.abs(best - (n - whole)) ? s : best));
     let w = whole;
     if (frac === 1) { w += 1; frac = 0; }
-    if (w === 0 && frac === 0) frac = allowEighths ? 0.125 : 0.25;
-    const f = frac ? FRACTIONS[frac] : "";
-    return (w ? String(w) : "") + f;
+    if (w === 0 && frac === 0) frac = 0.25;
+    return (w ? String(w) : "") + (frac ? FRACTIONS[frac] : "");
   }
 
   function roundMetric(n) {
@@ -41,49 +29,44 @@
     return Math.round(n / 50) * 50;
   }
 
-  // Returns { num: "1½", unit: "tbsp" } for one value.
+  // Returns { num, unit, value } for one amount. Units are g, ml, or a count word.
   function formatOne(n, unit) {
     if (unit === "g" || unit === "ml") {
       const r = roundMetric(n);
+      if (r === 0) return { num: "a pinch", unit: "", value: 0 };
       if (r >= 1000) {
         const big = Math.round((r / 1000) * 100) / 100;
-        return { num: String(big), unit: unit === "g" ? "kg" : big === 1 ? "litre" : "litres" };
+        return { num: String(big), unit: unit === "g" ? "kg" : big === 1 ? "litre" : "litres", value: big };
       }
-      return { num: String(r), unit };
+      return { num: String(r), unit, value: r };
     }
-    // Step down to a smaller spoon when the amount gets fiddly.
-    if (unit === "cup" && n < 0.25) return formatOne(n * 16, "tbsp");
-    if (unit === "tbsp" && n < 1) return formatOne(n * 3, "tsp");
-    if (unit === "tsp" && n < 0.1) return { num: "a pinch", unit: "" };
-    if (SPOON_UNITS.has(unit)) return { num: fraction(n, unit === "cup", true), unit };
     // Countable things (cloves, onions, lemons…): whole numbers once there are a few.
-    if (n >= 2) return { num: String(Math.round(n)), unit };
-    if (n >= 1) return { num: fraction(Math.round(n * 2) / 2, false, false), unit };
-    return { num: fraction(n, false, true), unit };
+    if (n >= 5) return { num: String(Math.round(n)), unit, value: Math.round(n) };
+    if (n >= 1) return { num: fraction(Math.round(n * 2) / 2), unit, value: n };
+    return { num: fraction(n), unit, value: n };
   }
 
   function unitLabel(unit, value) {
-    if (!unit) return "";
-    if (unit === "g" || unit === "ml" || unit === "kg") return unit;
-    return value > 1 && PLURALS[unit] ? PLURALS[unit] : unit;
+    if (!unit || METRIC.has(unit) || value <= 1) return unit || "";
+    if (PLURALS[unit]) return PLURALS[unit];
+    return /(ch|sh|s)$/.test(unit) ? unit + "es" : unit + "s";
   }
 
   function formatQty(qty, unit, factor) {
     const glue = (u) => (u === "g" || u === "ml" || u === "kg" ? "" : " ");
+    const label = (f) => {
+      const u = unitLabel(f.unit, f.value);
+      return u ? glue(u) + u : "";
+    };
     if (Array.isArray(qty)) {
       const lo = formatOne(qty[0] * factor, unit);
       const hi = formatOne(qty[1] * factor, unit);
-      const u = unitLabel(hi.unit, qty[1] * factor);
-      if (lo.num === hi.num && lo.unit === hi.unit) return hi.num + (u ? glue(u) + u : "");
-      if (lo.unit !== hi.unit) {
-        const lu = unitLabel(lo.unit, qty[0] * factor);
-        return `${lo.num}${lu ? glue(lu) + lu : ""}–${hi.num}${u ? glue(u) + u : ""}`;
-      }
-      return `${lo.num}–${hi.num}${u ? glue(u) + u : ""}`;
+      if (lo.num === hi.num && lo.unit === hi.unit) return hi.num + label(hi);
+      if (lo.unit !== hi.unit) return `${lo.num}${label(lo)}–${hi.num}${label(hi)}`;
+      return `${lo.num}–${hi.num}${label(hi)}`;
     }
     const one = formatOne(qty * factor, unit);
-    const u = unitLabel(one.unit, qty * factor);
-    return one.num + (u ? glue(u) + u : "");
+    return one.num + label(one);
   }
 
   function formatKcal(kcal) {
@@ -112,7 +95,7 @@
       ...recipe.ingredients.map((ing) => {
         let amount = ing.text != null ? ing.text : formatQty(ing.qty, ing.unit, factor);
         if (ing.also) {
-          const approx = ing.also.unit === "g" || ing.also.unit === "ml" ? "~" : "";
+          const approx = ing.also.approx || ing.also.unit === "g" || ing.also.unit === "ml" ? "~" : "";
           amount += ` (${approx}${formatQty(ing.also.qty, ing.also.unit, factor)})`;
         }
         return el("tr", {}, el("td", { class: "amount" }, amount), el("td", {}, ing.item));

@@ -27,7 +27,7 @@ All recipes live in [`recipes.js`](recipes.js). Copy an existing recipe into the
     { item: "Chicken thighs", qty: 600, unit: "g" },
     { item: "Garlic, grated", qty: 3, unit: "clove" },
     { item: "Red chilli", qty: [1, 2] },                       // a range
-    { item: "Lemongrass", qty: 1, unit: "stalk", also: { qty: 20, unit: "g" } }, // shows "1 stalk (~20g)"
+    { item: "Lemongrass", qty: 20, unit: "g", also: { qty: 1, unit: "stalk" } }, // shows "20g (1 stalk)"
     { item: "Salt & pepper", text: "to taste" },               // never scales
   ],
   method: ["Step one.", "Step two."],
@@ -35,7 +35,7 @@ All recipes live in [`recipes.js`](recipes.js). Copy an existing recipe into the
 }
 ```
 
-Units that scale nicely: `g`, `ml` (switch to kg / litres over 1000), `tsp`, `tbsp`, `cup` (shown as fractions, stepping down to a smaller spoon for small amounts), and count words like `clove`, `stalk`, `lemon`, `lime`, `tin`. Leave `unit` out for plain counts ("2 carrots" → `{ item: "Carrots", qty: 2 }`).
+Use metric for every amount: `g` or `ml` (they switch to kg / litres over 1000). For whole items, either use a count word as the unit (`clove`, `stalk`, `sprig`…) or give the weight and add the count with `also`, e.g. `{ item: "Onion", qty: 150, unit: "g", also: { qty: 1, unit: "onion" } }` → "150g (1 onion)". Add `approx: true` inside `also` to show it with a "~". Leave `unit` out for plain counts (`{ item: "Bay leaves", qty: 2 }`).
 
 ## Previewing locally
 
