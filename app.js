@@ -149,7 +149,10 @@
     const details = el(
       "details", { class: "recipe", id: recipe.id },
       el("summary", {},
-        el("span", { class: "recipe-name" }, recipe.name),
+        el("span", { class: "recipe-title" },
+          el("span", { class: "recipe-name" }, recipe.name),
+          (recipe.uses || []).map((u) => el("span", { class: "tag" }, u))
+        ),
         el("span", { class: "kcal-chip" }, `${formatKcal(recipe.kcal)} kcal`)
       ),
       el("div", { class: "recipe-body" },

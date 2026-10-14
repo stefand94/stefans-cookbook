@@ -3,7 +3,7 @@
 A small static recipe site, hosted on GitHub Pages:
 **https://stefand94.github.io/stefans-cookbook/**
 
-- Collapsible sections: Starters, Soups, Mains, Sides, Sauces, Marinades, Desserts
+- Collapsible sections: Starters, Soups, Mains, Sides, Sauces & Marinades, Desserts
 - Each recipe has a servings control that rescales every ingredient
 - Method and an estimated kcal per serving on every recipe
 - Search box, and shareable links to a single recipe (e.g. `…/stefans-cookbook/#nuoc-cham`)
@@ -18,6 +18,7 @@ All recipes live in [`recipes.js`](recipes.js). Copy an existing recipe into the
 {
   id: "my-new-recipe",            // used in the shareable link, lowercase-with-dashes
   name: "My New Recipe",
+  uses: ["Sauce", "Marinade"],    // optional tags shown next to the name
   servings: 4,                    // how many people the quantities below are for
   kcal: 350,                      // per serving (or a range: [300, 400])
   kcalNote: "optional extra detail",
