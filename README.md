@@ -43,6 +43,8 @@ Use metric for every amount: `g` or `ml` (they switch to kg / litres over 1000).
 
 For a `diagram`, write the SVG inline and style it with the `dg-*` classes in `styles.css` (see the feta cigars recipe) so it follows light and dark mode. The `steps` are shown as numbered captions under the picture.
 
+To link to another recipe from any text (blurb, ingredient, method step, note), write its id in double square brackets: `[[nuoc-cham]]` shows that recipe's name, `[[nuoc-cham|Nuoc Cham]]` shows your own label. Clicking it opens and scrolls to that recipe.
+
 ## Previewing locally
 
 ```bash

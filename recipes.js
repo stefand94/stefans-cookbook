@@ -27,7 +27,7 @@ window.COOKBOOK = {
           servings: 4,
           kcal: 170,
           kcalNote: "Two rolls each, without the dipping sauce. Nuoc Cham adds about 35.",
-          blurb: "Makes 8 rolls. Serve with the Nuoc Cham from Sauces.",
+          blurb: "Makes 8 rolls. Serve with [[nuoc-cham|Nuoc Cham]] for dipping.",
           ingredients: [
             { item: "Rice paper wrappers (22cm)", qty: 8, unit: "sheet" },
             { item: "Cooked king prawns, halved lengthways", qty: 240, unit: "g" },
@@ -45,7 +45,7 @@ window.COOKBOOK = {
             "Dip one rice paper in warm water for 10–15 seconds, until just pliable but still a little firm. It keeps softening on the board. Lay it on a damp tea towel or board.",
             "Lay 3 prawn halves cut-side up in a row about a third of the way up the wrapper, so they show through once rolled. Top with lettuce, a small pinch of noodles, carrot, cucumber and herbs. Don't overfill.",
             "Fold the bottom edge over the filling and tuck it in tightly, fold in both sides, then roll up firmly to the top.",
-            "Serve straight away with Nuoc Cham for dipping.",
+            "Serve straight away with [[nuoc-cham|Nuoc Cham]] for dipping.",
           ],
           notes: [
             { label: "Keeps", text: "Best within 2 hours. Cover with a damp tea towel and don't let them touch on the plate, or they stick together and tear." },
@@ -339,7 +339,7 @@ window.COOKBOOK = {
             { item: "Carrot, julienned", qty: 100, unit: "g", also: { qty: 1, unit: "carrot" } },
             { item: "Spring onions, sliced", qty: 2, unit: "spring onion" },
             { item: "Sesame seeds", qty: 5, unit: "g" },
-            { item: "Smashed Cucumber Salad or Quick Cucumber Pickle (Sides)", text: "to serve" },
+            { item: "[[smashed-cucumber-salad]] or [[cucumber-pickle]]", text: "to serve" },
           ],
           method: [
             "Mix the gochujang, honey, soy, garlic, ginger, sesame oil and rice vinegar. Set a third aside for glazing.",
@@ -456,7 +456,7 @@ window.COOKBOOK = {
           servings: 4,
           kcal: 270,
           kcalNote: "With Nuoc Cham and Đồ Chua, no noodles. 50g dry vermicelli adds about 180.",
-          blurb: "Hanoi-style grilled lemongrass pork, served with the Nuoc Cham and Đồ Chua from this book plus a pile of lettuce and herbs.",
+          blurb: "Hanoi-style grilled lemongrass pork, served with [[nuoc-cham|Nuoc Cham]] and [[do-chua|Đồ Chua]] plus a pile of lettuce and herbs.",
           ingredients: [
             { item: "Lean pork mince (5–10% fat)", qty: 500, unit: "g" },
             { item: "Lemongrass, minced", qty: 20, unit: "g", also: { qty: 1, unit: "stalk" } },
@@ -470,17 +470,17 @@ window.COOKBOOK = {
             { item: "Butter lettuce leaves", qty: 1, unit: "head" },
             { item: "Mint, coriander and Thai basil", qty: 30, unit: "g" },
             { item: "Cucumber, sliced", qty: 100, unit: "g" },
-            { item: "Nuoc Cham and Đồ Chua", text: "1 batch each" },
+            { item: "[[nuoc-cham|Nuoc Cham]] and [[do-chua|Đồ Chua]]", text: "1 batch each" },
           ],
           method: [
             "Mix everything from the pork to the black pepper. Knead with your hand for a minute until it turns sticky, which helps the patties hold together.",
             "Chill for 30 minutes (or up to a day).",
             "Shape into about 16 small, flat patties roughly 1cm thick.",
             "Spray with oil and air fry at 200°C for 10–12 minutes, turning halfway, until caramelised. Or griddle, or barbecue over charcoal (the traditional way).",
-            "Serve with lettuce, herbs, cucumber, Đồ Chua and Nuoc Cham. Wrap a patty in a lettuce leaf with herbs and pickles, then dip.",
+            "Serve with lettuce, herbs, cucumber, [[do-chua|Đồ Chua]] and [[nuoc-cham|Nuoc Cham]]. Wrap a patty in a lettuce leaf with herbs and pickles, then dip.",
           ],
           notes: [
-            { label: "The Hanoi way", text: "Make a double batch of Nuoc Cham, thin it with a little warm water, and drop the hot patties and pickles straight into each person's bowl of it." },
+            { label: "The Hanoi way", text: "Make a double batch of [[nuoc-cham|Nuoc Cham]], thin it with a little warm water, and drop the hot patties and pickles straight into each person's bowl of it." },
           ],
         },
         {
@@ -489,18 +489,18 @@ window.COOKBOOK = {
           servings: 4,
           kcal: 670,
           kcalNote: "A quarter of the chicken, with skin. About 450 without the skin.",
-          blurb: "Spatchcocked chicken marinated overnight in the Piri-Piri Sauce from Sauces & Marinades.",
+          blurb: "Spatchcocked chicken marinated overnight in [[piri-piri-sauce|Piri-Piri Sauce]].",
           ingredients: [
             { group: "Chicken & marinade" },
             { item: "Whole chicken", qty: 1600, unit: "g", also: { qty: 1, unit: "chicken" } },
-            { item: "Piri-Piri Sauce", qty: 60, unit: "ml" },
+            { item: "[[piri-piri-sauce|Piri-Piri Sauce]]", qty: 60, unit: "ml" },
             { item: "Lemon juice", qty: 45, unit: "ml", also: { qty: 1, unit: "lemon" } },
             { item: "Garlic, crushed", qty: 4, unit: "clove" },
             { item: "Smoked paprika", qty: 3, unit: "g" },
             { item: "Olive oil", qty: 15, unit: "ml" },
             { item: "Salt", qty: 8, unit: "g" },
             { group: "For basting" },
-            { item: "Piri-Piri Sauce, kept separate from the marinade", qty: 30, unit: "ml" },
+            { item: "[[piri-piri-sauce|Piri-Piri Sauce]], kept separate from the marinade", qty: 30, unit: "ml" },
             { item: "Butter, melted (optional)", qty: 20, unit: "g" },
           ],
           method: [
@@ -514,7 +514,7 @@ window.COOKBOOK = {
           ],
           notes: [
             { label: "Basting", text: "Only baste with sauce that hasn't touched the raw chicken." },
-            { label: "Serve with", text: "Chips, rice, or a tomato and onion salad. The Miznon beans work too." },
+            { label: "Serve with", text: "Chips, rice, or a tomato and onion salad. The [[miznon-beans|Miznon beans]] work too." },
           ],
         },
       ],
@@ -607,7 +607,7 @@ window.COOKBOOK = {
           notes: [
             {
               label: "No yoghurt on hand?",
-              text: "Use oil + tomato paste + spices + a squeeze of lemon as the binding paste instead, the closest tandoori-compatible substitute. A dialled-back peri-peri (~5ml) with extra curry powder also works as a binder, though the flavour reads as a different lane rather than a tight tandoori match.",
+              text: "Use oil + tomato paste + spices + a squeeze of lemon as the binding paste instead, the closest tandoori-compatible substitute. A dialled-back [[piri-piri-sauce|piri-piri]] (~5ml) with extra curry powder also works as a binder, though the flavour reads as a different lane rather than a tight tandoori match.",
             },
           ],
         },
@@ -888,7 +888,7 @@ window.COOKBOOK = {
           ingredients: [
             { item: "Garlic, crushed", qty: 6, unit: "clove" },
             { item: "Red wine", qty: 120, unit: "ml" },
-            { item: "Piri-Piri Sauce (above), or 2–3 bird's eye chillies", qty: 30, unit: "ml" },
+            { item: "[[piri-piri-sauce|Piri-Piri Sauce]], or 2–3 bird's eye chillies", qty: 30, unit: "ml" },
             { item: "Tomato paste", qty: 15, unit: "g" },
             { item: "Bay leaves", qty: 2 },
             { item: "Smoked paprika", qty: 2, unit: "g" },

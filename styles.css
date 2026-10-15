@@ -139,6 +139,8 @@ h4 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; color: 
 .method li::marker { color: var(--accent); font-weight: 700; }
 
 .kcal { margin: 18px 0 8px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 8px 8px 0; font-size: 15px; }
+a.xref { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a.xref:hover { text-decoration-thickness: 2px; }
 .note { font-size: 15px; margin: 8px 0; color: var(--ink); }
 .note strong { color: var(--accent); }
 .serve-with { margin-top: 16px; }

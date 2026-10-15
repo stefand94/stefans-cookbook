@@ -89,6 +89,31 @@
     return node;
   };
 
+  // Text can link to another recipe: [[nuoc-cham]] shows its name, [[nuoc-cham|the dip]] a custom label.
+  const recipeNames = {};
+  for (const section of book.sections) for (const r of section.recipes) recipeNames[r.id] = r.name;
+
+  function rich(text) {
+    const parts = [];
+    let last = 0;
+    for (const m of text.matchAll(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g)) {
+      const [whole, id, label] = m;
+      parts.push(text.slice(last, m.index));
+      if (recipeNames[id]) {
+        parts.push(el("a", {
+          class: "xref", href: "#" + id,
+          onclick: (e) => { e.preventDefault(); history.pushState(null, "", "#" + id); openFromHash(); },
+        }, label || recipeNames[id]));
+      } else {
+        console.warn(`Unknown recipe link: ${whole}`);
+        parts.push(label || id);
+      }
+      last = m.index + whole.length;
+    }
+    parts.push(text.slice(last));
+    return parts;
+  }
+
   function renderIngredients(recipe, tbody) {
     const factor = servingsState[recipe.id] / recipe.servings;
     tbody.replaceChildren(
@@ -100,7 +125,7 @@
           const approx = ing.also.approx || ing.also.unit === "g" || ing.also.unit === "ml" ? "~" : "";
           amount += ` (${approx}${formatQty(ing.also.qty, ing.also.unit, factor)})`;
         }
-        return el("tr", {}, el("td", { class: "amount" }, amount), el("td", {}, ing.item));
+        return el("tr", {}, el("td", { class: "amount" }, amount), el("td", {}, rich(ing.item)));
       })
     );
   }
@@ -112,7 +137,7 @@
     return el("figure", { class: "diagram" },
       el("h4", {}, diagram.title),
       art,
-      el("ol", { class: "diagram-steps" }, diagram.steps.map((s) => el("li", {}, s)))
+      el("ol", { class: "diagram-steps" }, diagram.steps.map((s) => el("li", {}, rich(s))))
     );
   }
 
@@ -158,7 +183,7 @@
         el("span", { class: "kcal-chip" }, `${formatKcal(recipe.kcal)} kcal`)
       ),
       el("div", { class: "recipe-body" },
-        recipe.blurb ? el("p", { class: "blurb" }, recipe.blurb) : null,
+        recipe.blurb ? el("p", { class: "blurb" }, rich(recipe.blurb)) : null,
         scaler,
         el("div", { class: "columns" },
           el("div", {},
@@ -167,7 +192,7 @@
           ),
           el("div", {},
             el("h4", {}, "Method"),
-            el("ol", { class: "method" }, recipe.method.map((s) => el("li", {}, s)))
+            el("ol", { class: "method" }, recipe.method.map((s) => el("li", {}, rich(s))))
           )
         ),
         recipe.diagram ? renderDiagram(recipe.diagram) : null,
@@ -175,11 +200,11 @@
           el("strong", {}, `${formatKcal(recipe.kcal)} kcal per serving`),
           recipe.kcalNote ? ` · ${recipe.kcalNote}` : ""
         ),
-        (recipe.notes || []).map((n) => el("p", { class: "note" }, el("strong", {}, n.label + ": "), n.text)),
+        (recipe.notes || []).map((n) => el("p", { class: "note" }, el("strong", {}, n.label + ": "), rich(n.text))),
         recipe.serveWith
           ? el("div", { class: "serve-with" },
               el("h4", {}, recipe.serveWith.title),
-              el("ul", {}, recipe.serveWith.items.map((i) => el("li", {}, i))))
+              el("ul", {}, recipe.serveWith.items.map((i) => el("li", {}, rich(i)))))
           : null
       )
     );
@@ -202,7 +227,7 @@
         section.blurb ? el("p", { class: "section-blurb" }, section.blurb) : null,
         section.recipes.map(renderRecipe),
         section.ideas
-          ? el("ul", { class: "ideas" }, section.ideas.map((i) => el("li", {}, el("strong", {}, i.name), " ", i.text)))
+          ? el("ul", { class: "ideas" }, section.ideas.map((i) => el("li", {}, el("strong", {}, i.name), " ", rich(i.text))))
           : null,
         !count && !section.ideas ? el("p", { class: "empty" }, "No recipes here yet.") : null
       )
