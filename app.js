@@ -114,18 +114,55 @@
     return parts;
   }
 
+  // ---------- Kitchen mode ----------
+  // Ticks survive a reload mid-cook (localStorage may be unavailable, e.g. private browsing).
+
+  const cooking = new Set(); // ids of recipes in cook mode
+  let wakeLock = null;
+
+  function loadTicks(id) {
+    try {
+      const v = JSON.parse(localStorage.getItem("cook:" + id));
+      if (v) return { on: true, ingredients: new Set(v.ingredients), steps: new Set(v.steps) };
+    } catch (e) { /* ignore */ }
+    return { on: false, ingredients: new Set(), steps: new Set() };
+  }
+
+  function saveTicks(id, ticks) {
+    try {
+      if (ticks.on) localStorage.setItem("cook:" + id, JSON.stringify({ ingredients: [...ticks.ingredients], steps: [...ticks.steps] }));
+      else localStorage.removeItem("cook:" + id);
+    } catch (e) { /* ignore */ }
+  }
+
+  // Keep the screen awake while anything is being cooked. The lock drops when the tab is hidden.
+  async function syncWakeLock() {
+    if (!("wakeLock" in navigator)) return;
+    if (cooking.size && !wakeLock && document.visibilityState === "visible") {
+      try {
+        wakeLock = await navigator.wakeLock.request("screen");
+        wakeLock.addEventListener("release", () => { wakeLock = null; });
+      } catch (e) { /* denied or unsupported */ }
+    } else if (!cooking.size && wakeLock) {
+      wakeLock.release();
+      wakeLock = null;
+    }
+  }
+  document.addEventListener("visibilitychange", syncWakeLock);
+
   function renderIngredients(recipe, tbody) {
     const factor = servingsState[recipe.id] / recipe.servings;
     tbody.replaceChildren(
-      ...recipe.ingredients.map((ing) => {
+      ...recipe.ingredients.map((ing, i) => {
         // { group: "Ponzu" } starts a sub-heading; the rows after it belong to that part of the dish.
         if (ing.group) return el("tr", { class: "group" }, el("th", { colspan: "2", scope: "colgroup" }, ing.group));
-        let amount = ing.text != null ? ing.text : formatQty(ing.qty, ing.unit, factor);
+        const amount = ing.text != null ? ing.text : formatQty(ing.qty, ing.unit, factor);
+        let also = null;
         if (ing.also) {
           const approx = ing.also.approx || ing.also.unit === "g" || ing.also.unit === "ml" ? "~" : "";
-          amount += ` (${approx}${formatQty(ing.also.qty, ing.also.unit, factor)})`;
+          also = el("span", { class: "also" }, ` (${approx}${formatQty(ing.also.qty, ing.also.unit, factor)})`);
         }
-        return el("tr", {}, el("td", { class: "amount" }, amount), el("td", {}, rich(ing.item)));
+        return el("tr", { "data-tick": "ingredients:" + i }, el("td", { class: "amount" }, amount, also), el("td", {}, rich(ing.item)));
       })
     );
   }
@@ -148,10 +185,63 @@
     const count = el("output", { class: "count", "aria-live": "polite" }, String(recipe.servings));
     const yieldEl = recipe.yield ? el("span", { class: "yield" }) : null;
 
+    const ticks = loadTicks(recipe.id);
+
+    // Reflect cook mode and ticks onto the ingredient rows and method steps.
+    const paint = () => {
+      const on = ticks.on;
+      const nodes = [...details.querySelectorAll("[data-tick]")];
+      for (const node of nodes) {
+        const [kind, i] = node.dataset.tick.split(":");
+        const done = ticks[kind].has(Number(i));
+        node.classList.toggle("done", on && done);
+        node.classList.remove("current");
+        if (on) {
+          node.setAttribute("role", "checkbox");
+          node.setAttribute("aria-checked", String(done));
+          node.tabIndex = 0;
+        } else {
+          node.removeAttribute("role");
+          node.removeAttribute("aria-checked");
+          node.removeAttribute("tabindex");
+        }
+      }
+      const current = on && nodes.find((n) => n.dataset.tick.startsWith("steps:") && !n.classList.contains("done"));
+      if (current) current.classList.add("current");
+    };
+
+    const toggleTick = (node) => {
+      const [kind, i] = node.dataset.tick.split(":");
+      const set = ticks[kind];
+      set.has(Number(i)) ? set.delete(Number(i)) : set.add(Number(i));
+      saveTicks(recipe.id, ticks);
+      paint();
+    };
+
+    const setCooking = (on) => {
+      ticks.on = on;
+      if (!on) { ticks.ingredients.clear(); ticks.steps.clear(); }
+      details.classList.toggle("cooking", on);
+      cookBtn.setAttribute("aria-pressed", String(on));
+      cookBtn.textContent = on ? "Done cooking" : "Cook";
+      resetTicks.hidden = !on;
+      if (on) { details.open = true; cooking.add(recipe.id); } else cooking.delete(recipe.id);
+      saveTicks(recipe.id, ticks);
+      paint();
+      syncWakeLock();
+    };
+
+    const cookBtn = el("button", { type: "button", class: "cook", "aria-pressed": "false", onclick: () => setCooking(!ticks.on) }, "Cook");
+    const resetTicks = el("button", {
+      type: "button", class: "reset", hidden: "",
+      onclick: () => { ticks.ingredients.clear(); ticks.steps.clear(); saveTicks(recipe.id, ticks); paint(); },
+    }, "reset ticks");
+
     const update = () => {
       const n = servingsState[recipe.id];
       count.textContent = n;
       renderIngredients(recipe, tbody);
+      paint();
       if (yieldEl) {
         yieldEl.textContent = `Makes about ${formatQty(recipe.yield.qty, recipe.yield.unit, n / recipe.servings)}`;
       }
@@ -170,7 +260,9 @@
       count,
       el("button", { type: "button", class: "step", "aria-label": "More servings", onclick: () => change(1) }, "+"),
       reset,
-      yieldEl
+      yieldEl,
+      el("span", { class: "cook-controls" }, resetTicks, cookBtn),
+      "wakeLock" in navigator ? null : el("span", { class: "wake-note" }, "Your screen may still sleep on this device.")
     );
 
     const details = el(
@@ -192,7 +284,7 @@
           ),
           el("div", {},
             el("h4", {}, "Method"),
-            el("ol", { class: "method" }, recipe.method.map((s) => el("li", {}, rich(s))))
+            el("ol", { class: "method" }, recipe.method.map((s, i) => el("li", { "data-tick": "steps:" + i }, rich(s))))
           )
         ),
         recipe.diagram ? renderDiagram(recipe.diagram) : null,
@@ -213,7 +305,20 @@
       if (details.open) history.replaceState(null, "", "#" + recipe.id);
     });
 
+    // In cook mode, tapping an ingredient or step ticks it off (links inside still work).
+    details.addEventListener("click", (e) => {
+      if (!ticks.on || e.target.closest("a, button")) return;
+      const node = e.target.closest("[data-tick]");
+      if (node) toggleTick(node);
+    });
+    details.addEventListener("keydown", (e) => {
+      if (!ticks.on || (e.key !== "Enter" && e.key !== " ") || !e.target.matches("[data-tick]")) return;
+      e.preventDefault();
+      toggleTick(e.target);
+    });
+
     update();
+    if (ticks.on) setCooking(true);
     return details;
   }
 
