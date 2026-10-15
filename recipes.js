@@ -44,9 +44,61 @@ window.COOKBOOK = {
             "Set everything out in piles before you start: rolling is an assembly line.",
             "Dip one rice paper in warm water for 10–15 seconds, until just pliable but still a little firm. It keeps softening on the board. Lay it on a damp tea towel or board.",
             "Lay 3 prawn halves cut-side up in a row about a third of the way up the wrapper, so they show through once rolled. Top with lettuce, a small pinch of noodles, carrot, cucumber and herbs. Don't overfill.",
-            "Fold the bottom edge over the filling and tuck it in tightly, fold in both sides, then roll up firmly to the top.",
+            "Fold the bottom edge over the filling and tuck it in tightly, fold in both sides, then roll up firmly to the top (see the diagram below).",
             "Serve straight away with [[nuoc-cham|Nuoc Cham]] for dipping.",
           ],
+          diagram: {
+            title: "How to roll",
+            steps: [
+              "On the softened wrapper, lay the prawns cut-side up (pink side touching the wrapper) in a row a third of the way up, then pile the filling just below them.",
+              "Fold the bottom edge up over the filling and tuck it in snugly under it.",
+              "Fold in both sides, like a burrito.",
+              "Roll up firmly to the top. The prawns end up on the outside, showing through the wrapper.",
+            ],
+            svg: `<svg viewBox="0 0 720 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <marker id="dg-arrowhead-roll" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path class="dg-head" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+  <g>
+    <circle class="dg-num" cx="20" cy="20" r="13"/><text class="dg-num-text" x="20" y="25">1</text>
+    <circle class="dg-sheet" cx="90" cy="105" r="70"/>
+    <path class="dg-prawn" transform="translate(62 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn" transform="translate(90 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn" transform="translate(118 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/>
+    <rect class="dg-leaf" x="46" y="130" width="88" height="20" rx="10"/>
+    <path class="dg-carrot" d="M54 140 L80 136 M66 145 L96 141 M86 138 L124 140 M100 146 L126 145"/>
+  </g>
+  <g transform="translate(180 0)">
+    <circle class="dg-num" cx="20" cy="20" r="13"/><text class="dg-num-text" x="20" y="25">2</text>
+    <path class="dg-ghost" d="M42.1 156 A70 70 0 0 0 137.9 156"/>
+    <path class="dg-sheet" d="M42.1 156 A70 70 0 1 1 137.9 156 Z"/>
+    <path class="dg-prawn" transform="translate(62 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn" transform="translate(90 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn" transform="translate(118 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/>
+    <path class="dg-fold" d="M42 156 L138 156 L138 132 Q90 120 42 132 Z"/>
+    <rect class="dg-hidden" x="46" y="132" width="88" height="20" rx="10"/>
+    <path class="dg-arrow" d="M150 176 Q170 154 150 130" marker-end="url(#dg-arrowhead-roll)"/>
+  </g>
+  <g transform="translate(360 0)">
+    <circle class="dg-num" cx="20" cy="20" r="13"/><text class="dg-num-text" x="20" y="25">3</text>
+    <path class="dg-ghost" d="M42.1 156 A70 70 0 1 1 137.9 156 Z"/>
+    <path class="dg-sheet" d="M46 156 L46 76 A44 44 0 0 1 134 76 L134 156 Z"/>
+    <path class="dg-prawn" transform="translate(66 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn" transform="translate(90 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn" transform="translate(114 120)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/>
+    <path class="dg-fold" d="M46 156 L134 156 L134 132 Q90 122 46 132 Z"/>
+    <rect class="dg-fold" x="46" y="76" width="16" height="80"/>
+    <rect class="dg-fold" x="118" y="76" width="16" height="80"/>
+    <path class="dg-arrow" d="M14 116 L38 116" marker-end="url(#dg-arrowhead-roll)"/>
+    <path class="dg-arrow" d="M166 116 L142 116" marker-end="url(#dg-arrowhead-roll)"/>
+  </g>
+  <g transform="translate(540 0)">
+    <circle class="dg-num" cx="20" cy="20" r="13"/><text class="dg-num-text" x="20" y="25">4</text>
+    <path class="dg-sheet" d="M46 120 L46 76 A44 44 0 0 1 134 76 L134 120 Z"/>
+    <rect class="dg-fold" x="46" y="76" width="16" height="44"/>
+    <rect class="dg-fold" x="118" y="76" width="16" height="44"/>
+    <rect class="dg-fold" x="40" y="114" width="100" height="42" rx="21"/>
+    <path class="dg-prawn dg-through" transform="translate(66 138)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn dg-through" transform="translate(90 138)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/><path class="dg-prawn dg-through" transform="translate(114 138)" d="M-13,3 C-8,-9 8,-9 13,3 C7,-2 -7,-2 -13,3 Z"/>
+    <path class="dg-arrow" d="M152 154 Q172 126 152 96" marker-end="url(#dg-arrowhead-roll)"/>
+  </g>
+</svg>`,
+          },
           notes: [
             { label: "Keeps", text: "Best within 2 hours. Cover with a damp tea towel and don't let them touch on the plate, or they stick together and tear." },
             { label: "Lighter", text: "Skip the vermicelli and double the lettuce and cucumber: about 125 kcal for two rolls." },
