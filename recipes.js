@@ -1029,6 +1029,31 @@ window.COOKBOOK = {
       name: "Desserts",
       recipes: [
         {
+          id: "light-cheesecake-ramekins",
+          name: "Light Air-Fryer Cheesecake Pots",
+          servings: 3,
+          kcal: 175,
+          kcalNote: "One ramekin.",
+          blurb: "Crustless baked cheesecake in ramekins, made with light cream cheese and a little honey.",
+          ingredients: [
+            { item: "Philadelphia Light cream cheese", qty: 280, unit: "g", also: { qty: 1, unit: "tub" } },
+            { item: "Medium egg", qty: 1, unit: "egg" },
+            { item: "Honey", qty: 10, unit: "g" },
+            { item: "Vanilla extract", qty: 2.5, unit: "ml" },
+            { item: "Plain flour", qty: 3, unit: "g" },
+          ],
+          method: [
+            "Mix the cream cheese, egg, honey and vanilla together until smooth.",
+            "Sift in the flour and mix it in.",
+            "Pour into 3 standard ramekins.",
+            "Air fry at 180°C for about 12 minutes, until the edges are set and the middle still has a slight wobble.",
+            "Leave to cool, then chill for at least 2 hours to firm up.",
+          ],
+          notes: [
+            { label: "Toppings", text: "Fresh berries, or the spiced roasted stone fruit below." },
+          ],
+        },
+        {
           id: "basque-cheesecake",
           name: "Basque Burnt Cheesecake",
           servings: 10,
