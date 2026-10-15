@@ -19,11 +19,16 @@
     <nav id="toc" class="toc" aria-label="Sections"></nav>
     <div class="toolbar">
       <input id="search" type="search" placeholder="Search recipes or ingredients…" aria-label="Search recipes">
-      <button id="toggle-all" type="button">Expand all</button>
+      <button id="expand-all" type="button">Expand all</button>
+      <button id="collapse-all" type="button">Collapse all</button>
     </div>
   </header>
 
   <main id="book"></main>
+  <div id="no-results" class="no-results" hidden>
+    <p></p>
+    <button id="clear-search" type="button">Clear search</button>
+  </div>
 
   <footer class="footer">
     Calories are estimates per serving. Quantities are rounded to sensible kitchen amounts when scaled.

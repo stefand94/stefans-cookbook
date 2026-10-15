@@ -211,6 +211,7 @@
 
   function applySearch(term) {
     const q = term.trim().toLowerCase();
+    let anyAtAll = false;
     document.querySelectorAll(".section").forEach((sec) => {
       let anyMatch = false;
       sec.querySelectorAll(".recipe, .ideas li").forEach((item) => {
@@ -220,7 +221,11 @@
       });
       sec.hidden = q && !anyMatch;
       if (q && anyMatch) sec.open = true;
+      anyAtAll = anyAtAll || anyMatch;
     });
+    const empty = document.getElementById("no-results");
+    empty.hidden = anyAtAll;
+    empty.querySelector("p").textContent = `No recipes match “${term.trim()}”.`;
   }
 
   // ---------- Boot ----------
@@ -240,12 +245,20 @@
 
   document.getElementById("search").addEventListener("input", (e) => applySearch(e.target.value));
 
-  let allOpen = false;
-  const toggleAll = document.getElementById("toggle-all");
-  toggleAll.addEventListener("click", () => {
-    allOpen = !allOpen;
-    document.querySelectorAll("details").forEach((d) => (d.open = allOpen));
-    toggleAll.textContent = allOpen ? "Collapse all" : "Expand all";
+
+  const search = document.getElementById("search");
+  document.getElementById("clear-search").addEventListener("click", () => {
+    search.value = "";
+    applySearch("");
+    search.focus();
+  });
+
+  // Expand shows every section's recipe list; the recipes themselves stay closed.
+  document.getElementById("expand-all").addEventListener("click", () => {
+    document.querySelectorAll(".section").forEach((d) => (d.open = true));
+  });
+  document.getElementById("collapse-all").addEventListener("click", () => {
+    document.querySelectorAll("details").forEach((d) => (d.open = false));
   });
 
   // Open a recipe or section from a shared link, e.g. …/#nuoc-cham
