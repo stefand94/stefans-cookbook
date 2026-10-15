@@ -93,6 +93,8 @@
     const factor = servingsState[recipe.id] / recipe.servings;
     tbody.replaceChildren(
       ...recipe.ingredients.map((ing) => {
+        // { group: "Ponzu" } starts a sub-heading; the rows after it belong to that part of the dish.
+        if (ing.group) return el("tr", { class: "group" }, el("th", { colspan: "2", scope: "colgroup" }, ing.group));
         let amount = ing.text != null ? ing.text : formatQty(ing.qty, ing.unit, factor);
         if (ing.also) {
           const approx = ing.also.approx || ing.also.unit === "g" || ing.also.unit === "ml" ? "~" : "";

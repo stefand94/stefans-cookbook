@@ -44,10 +44,7 @@ body {
 
 h1, h2, h3, h4 { font-family: Fraunces, Georgia, serif; font-weight: 600; margin: 0; }
 
-.masthead, main, .no-results { max-width: 920px; margin: 0 auto 24px; padding: 0 16px; text-align: center; color: var(--muted); }
-.no-results p { margin: 8px 0 12px; }
-
-.footer { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+.masthead, main, .footer { max-width: 920px; margin: 0 auto; padding: 0 16px; }
 
 .masthead { padding-top: 48px; padding-bottom: 24px; }
 .eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; color: var(--accent); font-weight: 600; margin: 0 0 6px; }
@@ -130,6 +127,11 @@ h4 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; color: 
 
 .ingredients { width: 100%; border-collapse: collapse; font-size: 15px; }
 .ingredients td { padding: 6px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+.ingredients tr.group th {
+  text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); padding: 14px 0 4px; border-bottom: 1px solid var(--line);
+}
+.ingredients tr.group:first-child th { padding-top: 2px; }
 .ingredients .amount { font-weight: 600; white-space: nowrap; padding-right: 14px; font-variant-numeric: tabular-nums; }
 
 .method { margin: 0; padding-left: 20px; }
@@ -157,6 +159,9 @@ h4 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; color: 
 .dg-num-text { fill: var(--paper); font: 600 14px Inter, system-ui, sans-serif; text-anchor: middle; }
 .serve-with ul, .ideas { margin: 0; padding-left: 20px; }
 .serve-with li, .ideas li { margin-bottom: 6px; }
+
+.no-results { max-width: 920px; margin: 0 auto 24px; padding: 0 16px; text-align: center; color: var(--muted); }
+.no-results p { margin: 8px 0 12px; }
 
 .footer { color: var(--muted); font-size: 13px; padding-top: 12px; padding-bottom: 40px; }
 

@@ -30,6 +30,7 @@ All recipes live in [`recipes.js`](recipes.js). Copy an existing recipe into the
     { item: "Red chilli", qty: [1, 2] },                       // a range
     { item: "Lemongrass", qty: 20, unit: "g", also: { qty: 1, unit: "stalk" } }, // shows "20g (1 stalk)"
     { item: "Salt & pepper", text: "to taste" },               // never scales
+    { group: "For the dressing" },                             // sub-heading; rows below belong to it
   ],
   method: ["Step one.", "Step two."],
   notes: [{ label: "Tip", text: "Optional notes shown under the method." }],
